@@ -98,7 +98,7 @@ function claim($token, $data)
 		return false;
 		}
 	}
-echo "Choose Login or Register? Login = 1 & Register = 2: ";
+echo "Choose Register? Register = 2: ";
 $type = trim(fgets(STDIN));
 if($type == 2){
 echo "It's Register Way\n";
@@ -127,14 +127,14 @@ if ($register == false)
 		$claim = claim($verif, $data);
 		if ($claim == false){
 			echo "Failed to Claim Voucher GOFOODBOBA19, Coba redeem voucher lain\n";
-			echo "Sleep 10 seconds";
+			echo "Sleep 10 seconds\n";
 			sleep(10);
 			echo "Ready to Claim GOFOODBOBA10\n";
 			$data = '{"promo_code":"GOFOODBOBA10"}';
 			$claim2 = claim($verif, $data);
 			if($claim2 == false) {
 				echo "Failed to claim voucher GOFOODBOBA10";
-				echo "Sleep 10 seconds";
+				echo "Sleep 10 seconds\n";
 				sleep(10);
 				echo "Ready to Claim GOFOODBOBA07\n";
 				$data = '{"promo_code":"GOFOODBOBA07"}';
@@ -142,7 +142,7 @@ if ($register == false)
 				if($claim3 == false) {
 					echo "Failed to claim voucher GOFOODBOBA07";
 				}else{
-					echo $claim2 . "\n";
+					echo $claim3 . "\n";
 				}
 			}else{
 				echo $claim2 . "\n";
@@ -152,39 +152,7 @@ if ($register == false)
 			}
 		}
 	}
-}else if($type == 1){
-echo "It's Login Way\n";
-echo "Input 62 For ID and 1 For US Phone Number\n";
-echo "Enter Number: ";
-$nope = trim(fgets(STDIN));
-$login = login($nope);
-if ($login == false)
-	{
-	echo "Failed to Get OTP!\n";
-	}
-  else
-	{
-	echo "Enter Your OTP: ";
-	// echo "Enter Number: ";
-	$otp = trim(fgets(STDIN));
-	$verif = veriflogin($otp, $login);
-	if ($verif == false)
-		{
-		echo "Failed to Login with Your Number!\n";
-		}
-	  else
-		{
-		echo "Ready to Claim\n";
-		$claim = claim($verif);
-		if ($claim == false)
-			{
-			echo "Failed to Claim Voucher, Try to Claim Manually\n";
-			}
-		  else
-			{
-			echo $claim . "\n";
-			}
-		}
-	}
+}else{
+	die("error");
 }
 ?>
